@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light palette. Neutrals are biased cool toward the accent rather than
+   being pure greys, so the page reads as a considered set. */
+:root {
+  --ground: #f5f6f7;
+  --surface: #ffffff;
+  --ink: #12161a;
+  --ink-2: #4a535e;
+  --ink-3: #7c8794;
+  --rule: #dde1e6;
+  --rule-strong: #b9c1c9;
+  --accent: #1b4d6b;
+  --accent-soft: #e7eff4;
+}
+
+/* Only the tokens are redefined, never the component styles, so a single
+   class set works in every theme state. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0e1216;
+    --surface: #151a20;
+    --ink: #e9edf1;
+    --ink-2: #9ba6b2;
+    --ink-3: #69737f;
+    --rule: #252c34;
+    --rule-strong: #39424c;
+    --accent: #6bb6d6;
+    --accent-soft: #16232c;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground: #0e1216;
+  --surface: #151a20;
+  --ink: #e9edf1;
+  --ink-2: #9ba6b2;
+  --ink-3: #69737f;
+  --rule: #252c34;
+  --rule-strong: #39424c;
+  --accent: #6bb6d6;
+  --accent-soft: #16232c;
+}
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 10.5pt;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
