@@ -3,7 +3,7 @@
 My CV as a small Next.js site. Built with the App Router, TypeScript and
 Tailwind CSS, deployed on Vercel.
 
-**Live:** _add your Vercel URL here once deployed_
+**Live:** https://hafsa-nadeem-cv1.vercel.app/
 
 ## Running it
 
