@@ -1,53 +1,128 @@
-import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono, Source_Sans_3 } from "next/font/google";
+import { DefinitionRows } from "@/components/DefinitionRows";
+import { Entry } from "@/components/Entry";
+import { Masthead } from "@/components/Masthead";
+import { Metrics } from "@/components/Metrics";
+import { Section } from "@/components/Section";
+import {
+  education,
+  profile,
+  projects,
+  roles,
+  skills,
+} from "@/lib/cv";
 
-import { profile } from "@/lib/cv";
-import "./globals.css";
-
-const display = Archivo({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
-  display: "swap",
-});
-
-export const metadata: Metadata = {
-  title: `${profile.name}, Backend Software Engineer`,
-  description:
-    "Backend software engineer in Lahore, Pakistan. Node.js, Express, Spring Boot, MySQL and AWS.",
-  openGraph: {
-    title: `${profile.name}, Backend Software Engineer`,
-    description:
-      "Backend software engineer in Lahore, Pakistan. Node.js, Express, Spring Boot, MySQL and AWS.",
-    type: "profile",
-  },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function Home() {
   return (
-    <html lang="en">
-      <body
-        className={`${display.variable} ${body.variable} ${mono.variable} font-body text-base leading-relaxed`}
-      >
-        {children}
-      </body>
-    </html>
+    <main className="mx-auto max-w-sheet px-7 pb-24 pt-14">
+      <Masthead />
+      <Metrics />
+
+      <Section title="Summary">
+        <p className="max-w-measure text-[1.06rem] leading-relaxed">
+          {profile.summary}
+        </p>
+      </Section>
+
+      <Section title="Experience">
+        {roles.map((role) => (
+          <Entry
+            key={role.org}
+            rail={
+              <>
+                {role.from} –<br />
+                {role.to}
+              </>
+            }
+            badge={role.current ? "Current" : undefined}
+            heading={
+              <>
+                {role.title}, <span className="text-accent">{role.org}</span>
+                {role.kind ? (
+                  <span className="text-[0.86rem] font-medium text-ink-3">
+                    {" "}
+                    ({role.kind})
+                  </span>
+                ) : null}
+              </>
+            }
+            where={
+              <>
+                {role.where}
+                {role.link ? (
+                  <>
+                    {" · "}
+                    <a
+                      className="not-italic text-accent hover:underline"
+                      href={role.link.href}
+                    >
+                      {role.link.label}
+                    </a>
+                  </>
+                ) : null}
+              </>
+            }
+            stack={role.stack}
+            bullets={role.bullets}
+          />
+        ))}
+      </Section>
+
+      <Section title="Selected Projects">
+        {projects.map((project) => (
+          <Entry
+            key={project.name}
+            rail={project.note}
+            heading={
+              <>
+                {project.name}
+                {project.tagline ? (
+                  <span className="text-[0.86rem] font-medium text-ink-3">
+                    {" "}
+                    ({project.tagline})
+                  </span>
+                ) : null}
+              </>
+            }
+            stack={project.stack}
+            bullets={project.bullets}
+          />
+        ))}
+      </Section>
+
+      <Section title="Skills">
+        <DefinitionRows
+          rows={skills.map((skill) => ({
+            label: skill.label,
+            content: skill.items,
+          }))}
+        />
+      </Section>
+
+      <Section title="Education">
+        {education.map((study) => (
+          <Entry
+            key={study.qualification}
+            rail={
+              <>
+                {study.from} –<br />
+                {study.to}
+              </>
+            }
+            heading={study.qualification}
+            where={`${study.institution}, ${study.detail}`}
+          />
+        ))}
+      </Section>
+
+
+      <footer className="mt-12 flex flex-wrap justify-between gap-x-5 gap-y-2 border-t border-rule pt-5 text-[0.86rem] text-ink-3">
+        <span>
+          {profile.name} · Software Engineer · {profile.location}
+        </span>
+        <a className="text-accent hover:underline" href={`mailto:${profile.email}`}>
+          {profile.email}
+        </a>
+      </footer>
+    </main>
   );
 }
