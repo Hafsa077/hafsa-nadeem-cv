@@ -4,7 +4,6 @@ import { Masthead } from "@/components/Masthead";
 import { Metrics } from "@/components/Metrics";
 import { Section } from "@/components/Section";
 import {
-  credentials,
   education,
   profile,
   projects,
@@ -30,14 +29,14 @@ export default function Home() {
             key={role.org}
             rail={
               <>
-                {role.from} —<br />
+                {role.from} –<br />
                 {role.to}
               </>
             }
             badge={role.current ? "Current" : undefined}
             heading={
               <>
-                {role.title} — <span className="text-accent">{role.org}</span>
+                {role.title}, <span className="text-accent">{role.org}</span>
                 {role.kind ? (
                   <span className="text-[0.86rem] font-medium text-ink-3">
                     {" "}
@@ -79,7 +78,7 @@ export default function Home() {
                 {project.tagline ? (
                   <span className="text-[0.86rem] font-medium text-ink-3">
                     {" "}
-                    — {project.tagline}
+                    ({project.tagline})
                   </span>
                 ) : null}
               </>
@@ -105,31 +104,16 @@ export default function Home() {
             key={study.qualification}
             rail={
               <>
-                {study.from} —<br />
+                {study.from} –<br />
                 {study.to}
               </>
             }
             heading={study.qualification}
-            where={`${study.institution} — ${study.detail}`}
+            where={`${study.institution}, ${study.detail}`}
           />
         ))}
       </Section>
 
-      <Section title="Certifications">
-        <DefinitionRows
-          rows={credentials.map((credential) => ({
-            label: credential.issuer,
-            content: credential.items.map((item, i) => (
-              <span key={item.href}>
-                {i > 0 ? " · " : null}
-                <a className="text-accent hover:underline" href={item.href}>
-                  {item.name}
-                </a>
-              </span>
-            )),
-          }))}
-        />
-      </Section>
 
       <footer className="mt-12 flex flex-wrap justify-between gap-x-5 gap-y-2 border-t border-rule pt-5 text-[0.86rem] text-ink-3">
         <span>
