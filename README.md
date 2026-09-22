@@ -24,7 +24,7 @@ npm start
 ## How it's put together
 
 All CV content lives in [`lib/cv.ts`](lib/cv.ts) as typed data — roles,
-projects, skills, education and credentials. The components in
+projects, skills and education. The components in
 [`components/`](components) map over those structures and never hard-code copy,
 so updating the CV means editing one file rather than hunting through JSX.
 
