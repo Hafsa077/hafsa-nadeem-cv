@@ -27,13 +27,13 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${profile.name} — Software Engineer`,
+  title: `${profile.name}, Backend Software Engineer`,
   description:
-    "Backend and full-stack software engineer in Lahore, Pakistan. Node.js, Spring Boot, AWS, Next.js and TypeScript.",
+    "Backend software engineer in Lahore, Pakistan. Node.js, Express, Spring Boot, MySQL and AWS.",
   openGraph: {
-    title: `${profile.name} — Software Engineer`,
+    title: `${profile.name}, Backend Software Engineer`,
     description:
-      "Backend and full-stack software engineer in Lahore, Pakistan. Node.js, Spring Boot, AWS, Next.js and TypeScript.",
+      "Backend software engineer in Lahore, Pakistan. Node.js, Express, Spring Boot, MySQL and AWS.",
     type: "profile",
   },
 };
